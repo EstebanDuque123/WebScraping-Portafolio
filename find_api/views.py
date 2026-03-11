@@ -1,3 +1,0 @@
-# Elimina o comenta esta función si existe
-# def buscar_formulario(request):
-#     ...
