@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+body{
+    font-family:Segoe UI, sans-serif;
+    background:#f3f4f6;
+    color:#1f2937;
+}
+
+/* TITULO */
+h1{
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    margin-bottom:30px;
+    color:#4b5563;
+    font-size:15px;
+}
+
+/* MENSAJES */
+.msg{
+    padding:12px 16px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.success{
+    background-color:#d1fae5;
+    color:#065f46;
+}
+
+.error{
+    background-color:#fee2e2;
+    color:#991b1b;
+}
+
+/* BUSCADOR */
+.search-wrapper{
+    position:relative;
+    margin-bottom:30px;
+}
+
+#filtroScrapers{
+    width:100%;
+    padding:14px 45px 14px 16px;
+    border-radius:10px;
+    border:1px solid #d1d5db;
+    font-size:15px;
+}
+
+.clear-btn{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:transparent;
+    font-size:20px;
+    cursor:pointer;
+    color:#6b7280;
+    display:none;
+}
+
+/* GRID */
+.scraper-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+}
+
+/* TARJETAS */
+.card{
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    border-left:6px solid #2563eb;
+    box-shadow:0 5px 15px rgba(0,0,0,0.07);
+    transition:0.25s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+/* TITULO TARJETA */
+.card h2{
+    font-size:17px;
+    margin-bottom:6px;
+}
+
+/* TECNOLOGIA */
+.tech{
+    font-size:13px;
+    color:#6b7280;
+    margin-bottom:14px;
+}
+
+/* BOTONES */
+.button{
+    display:inline-block;
+    padding:9px 15px;
+    border-radius:7px;
+    text-decoration:none;
+    font-size:13px;
+    margin-right:6px;
+    background:#2563eb;
+    color:white;
+    transition:0.2s;
+}
+
+.button:hover{
+    background:#1d4ed8;
+}
+
+.download{
+    background:#16a34a;
+}
+
+.download:hover{
+    background:#15803d;
+}
+
+</style>
+
+<h1>🕸️ Portafolio de Web Scraping con Python</h1>
+
+<p class="subtitle">
+Ejemplos de extracción de datos utilizando diferentes tecnologías: BeautifulSoup, Selenium, Playwright y consumo de APIs.
+</p>
+
+<!-- Mensajes de éxito o error -->
+{% for message in messages %}
+    <div class="msg {% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<div class="search-wrapper">
+    <input type="text" id="filtroScrapers" placeholder="Buscar scraper o tecnología...">
+    <button class="clear-btn" id="clearFiltro">&times;</button>
+</div>
+
+<div class="scraper-grid">
+
+<div class="card">
+<h2>🕵️🇦🇷 Argentina Justice Fugitives</h2>
+<div class="tech">⚙️ BeautifulSoup Scraper</div>
+<a href="{% url 'ejecutar_argentina_profugos_de_la_justicia' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_argentina_profugos_de_la_justicia' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>🤖🇩🇪 Germany Most Wanted</h2>
+<div class="tech">⚙️ Selenium Automation</div>
+<a href="{% url 'ejecutar_mwalemania' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_mwalemania' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>🌐🇬🇹 Guatemala Most Wanted</h2>
+<div class="tech">⚙️ BeautifulSoup (bs4)</div>
+<a href="{% url 'ejecutar_mw_guatemala' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_mw_guatemala' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>🚨🇸🇻 El Salvador Top 100 Wanted</h2>
+<div class="tech">⚙️ BeautifulSoup (bs4)</div>
+<a href="{% url 'ejecutar_mwsalvador' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_mwsalvador' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>🛰️🇪🇺 Europol Wanted List</h2>
+<div class="tech">⚙️ Playwright Browser Automation</div>
+<a href="{% url 'ejecutar_europol' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_europol' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>📡🇨🇴 UBPD Missing Persons Dataset</h2>
+<div class="tech">⚙️ API / Static Data Extraction</div>
+<a href="{% url 'ejecutar_scrape_listado_personas_desaparecidas' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_xlsx_listado_personas_desaparecidas' %}" class="button download">Descargar</a>
+</div>
+
+<div class="card">
+<h2>⚖️🇦🇷 Argentina Judicial Fugitives</h2>
+<div class="tech">⚙️ BeautifulSoup Scraper</div>
+<a href="{% url 'ejecutar_scrape_profugos_por_la_justicia_argentina' %}" class="button">Ejecutar</a>
+<a href="{% url 'descargar_xlsx_profugos_por_la_justicia_argentina' %}" class="button download">Descargar</a>
+</div>
+
+</div>
+
+<script>
+const inputFiltro = document.getElementById('filtroScrapers');
+const clearBtn = document.getElementById('clearFiltro');
+
+function filtrarTarjetas(filtro){
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const texto = card.textContent.toLowerCase();
+        card.style.display = texto.includes(filtro) ? '' : 'none';
+    });
+}
+
+function toggleClear(){
+    clearBtn.style.display = inputFiltro.value.length > 0 ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const guardado = localStorage.getItem('filtroScrapers') || '';
+    inputFiltro.value = guardado;
+    filtrarTarjetas(guardado);
+    toggleClear();
+});
+
+inputFiltro.addEventListener('input', function(){
+    const filtro = this.value.toLowerCase();
+    localStorage.setItem('filtroScrapers', filtro);
+    filtrarTarjetas(filtro);
+    toggleClear();
+});
+
+clearBtn.addEventListener('click', () => {
+    inputFiltro.value = '';
+    localStorage.removeItem('filtroScrapers');
+    filtrarTarjetas('');
+    toggleClear();
+    inputFiltro.focus();
+});
+</script>
+
+{% endblock %}
